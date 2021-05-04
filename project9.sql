@@ -1,1 +1,1 @@
-SELECT * FROM patents;
+ALTER ROLE smsovereign password 'Jag283sam240';
