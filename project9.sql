@@ -24,3 +24,5 @@ CREATE TABLE patents (
 \COPY state_pop FROM '/Users/maxgawason/cs403/project9/state_pop_data.csv' DELIMITER ',' CSV HEADER;
 \COPY tax_revenue FROM '/Users/maxgawason/cs403/project9/tax_revenue_data.csv' DELIMITER ',' CSV HEADER;
 \COPY patents FROM '/Users/maxgawason/cs403/project9/patent_data.csv' DELIMITER ',' CSV HEADER;
+
+SELECT * FROM patents;
