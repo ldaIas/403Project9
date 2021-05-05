@@ -48,28 +48,24 @@ for state in state_pops:
 execution = "SELECT * FROM tax_revenue WHERE state IN " + state_query
 cursor.execute(execution)
 state_rev = cursor.fetchall()
-#print(state_rev)
 
 # Add to revenue dict
 state_dict = {}
-#print(state_rev[0][0])
+
 for state in state_rev:
     state_dict.setdefault(state[0], []).append([state[1], state[2]])
-
-#print(state_dict)
 
 # Get state patent numbers
 execution = "Select * FROM patents WHERE state IN " + state_query
 cursor.execute(execution)
 state_patents = cursor.fetchall()
 
-#print(state_patents)
+
 patents_dict = {}
 
 for state in state_patents:
     patents_dict.setdefault(state[1], []).append([state[0], state[2]])
-#print(patents_dict)
-#print(state_patents)
+
 # Add to state
 for state in state_patents:
     for curr_state in state_dict[state[1]]:
@@ -88,8 +84,6 @@ for state in state_patents:
         i += 1
     i = 0
 
-#print(state_dict['NV'])
-
 # Graphing state stats per capita
 
 curr_plot = 0
@@ -103,7 +97,6 @@ for curr_state in states_to_examine:
     # Make left y-axis marijuana revenue per capita
     p1_y = [round(state[1]/(pops_dict[curr_state]*1000000), 2) for state in state_dict[curr_state]]
     p1, = ax.plot(x_axis, p1_y, "g-", label="Marijuana Revenue")
-    #print(p1_y)
 
     # Make right y-axis patent numbers per capita
     #p2_y = [round(state[2]/pops_dict[curr_state]) for state in state_dict[curr_state]]
@@ -111,8 +104,6 @@ for curr_state in states_to_examine:
     patent_x_axis = [int(state[0]) for state in patents_dict[curr_state]]
     p2, = twin1.plot(patent_x_axis, p2_y, "b-", label="Number of Patents")
     
-    #print(p2_y)
-
     # Set bounds for the axes
     ax.set_xlim(min(patent_x_axis), max(x_axis))
     ax.set_ylim(0, float(max(p1_y))+(.1*float(max(p1_y))))
